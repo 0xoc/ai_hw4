@@ -136,3 +136,12 @@ is more accurate even when there are some outliers in the sample data, because t
 samples are less.
 
 ![partB](http://serve.l37.ir/partB.png)
+
+
+## Part C: Binary Classification
+
+This is the cost function that is used through out the training phase:
+
+ - J(&theta;) = - 1/m &Sigma; [
+y<sup>(i)</sup> log(h<sub>&theta;</sub>(x<sup>(i)</sup>)) + (1 - y<sup>(i)</sup>)log(1 - h<sub>&theta;</sub>(x<sup>(i)</sup>))
+]

@@ -36,18 +36,24 @@ def load(file):
     return _x, _y, _class
 
 
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+
+def cost()
+
 # load the training set
 x, y, cls = load("training_set.data")
 
+# class A indexes
 class_A = [i for i in range(len(cls)) if cls[i] == value[A]]
+# class B indexes
 class_B = [i for i in range(len(cls)) if cls[i] == value[B]]
 
-print(class_A)
-
 # plot class A data with red color
-plt.plot([x[i] for i in class_A], [y[i] for i in class_A], color[A] + 'o')
-
+plt.plot([x[i] for i in class_A], [y[i] for i in class_A], color[A] + 'o', markersize=3)
 # plot class B data with red color
-plt.plot([x[i] for i in class_B], [y[i] for i in class_B], color[B] + 'o')
+plt.plot([x[i] for i in class_B], [y[i] for i in class_B], color[B] + 'o', markersize=3)
 
+plt.legend(loc='best')
 plt.show()
