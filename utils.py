@@ -27,7 +27,7 @@ def gradient_descent(x_vector, y_vector, cost_function, alpha=0.1, ep=0.1 ** 12,
     last = np.math.inf
     beta_track = []
 
-    while True:
+    while limit:
         limit -= 1
         hypothesis = X.dot(beta)
         loss = hypothesis - y

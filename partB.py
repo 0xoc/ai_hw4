@@ -53,7 +53,7 @@ def LWR(x, y, method="closed_form"):
     if method == "closed_form":
         theta = closed_form(w, x, y)
     else:
-        theta = gradient_descent(x, y, J, limit=5000, alpha=0.1)
+        theta = gradient_descent(x, y, J, limit=150, alpha=0.1)
 
     for i in range(n):
         _learned[i] = theta[0] + theta[1] * x[i]
