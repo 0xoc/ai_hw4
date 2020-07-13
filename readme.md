@@ -43,8 +43,24 @@ line that has been learned through closed form equations.
  a 25 percent increase in each of them leads to the first value being 0.0125 and the second
  value being 1000, this means that the change in the second value dominates the behaviour of the whole system.
  
+![ds1_closed](http://serve.l37.ir/dataset_1_with_closed_form.png)
+
+_Data set 1 - Closed Form_
+
+![ds1_gd](http://serve.l37.ir/dataset_1_with_%20Gradient_Descent.png)
+
+_Data set 1 - Gradient Descent_
+
 
  - The 3rd and 4th plots are the same as the first two plots but with the data from dataset 2.
+
+![ds2_closed](http://serve.l37.ir/dataset2_with_closed_form.png)
+
+_Data set 2 - Closed Form_
+
+![ds2_gd](http://serve.l37.ir/dataset_2_with_%20Gradient_Descent.png)
+
+_Data set 2 - Gradient Descent_
 
  - dataset 2 has some outliers. These outliers cause the learned model
 to be a bit off and the accuracy of the model decreases because it's 
@@ -55,9 +71,17 @@ for the majority of the samples.
 
  - the 5th plot shows theta 1 and theta 2 as they were learned by gradient decent method
  
+ ![the_learn](http://serve.l37.ir/tl.png)
+ 
+_Theta learn_
+ 
  - the last plot shows a binary sigmoid function. A binary sigmoid function is used in classification problems.
  if the output of this function is more than 0.5, the input is considered to be of a class represented by 1 and
  if it's less than 0.5, it's considered to be of class 0
+ 
+  ![sigmoid](http://serve.l37.ir/sigmoid.png)
+  
+_Theta learn_
  
 ## Part B
  In locally weighted linear regression, instead of all data having the same importance, 
@@ -89,10 +113,16 @@ Equating the above formulas to zero, we will have:
 
 it can be rewritten as:
 
-![hi](http://serve.l37.ir/eq.png)
+![matrix_formula](http://serve.l37.ir/eq.png)
 
 in other words:
 A&theta; = b
 
 **now we can solve for &theta; and arrive at a closed form formula:
 &theta; = A<sup>-1</sup>b**
+
+In the figure below you can see the effect of locally weighted regression. in LWR the model
+is more accurate even when there are some outliers in the sample data, because their effect on farther
+samples are less.
+
+![partB](http://serve.l37.ir/partB.png)

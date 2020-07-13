@@ -23,17 +23,20 @@ def get_x_y(data_set):
     return x, y
 
 
-def kernel_function(xi, x0, tau=.005):
-    return np.exp(- (xi - x0) ** 2 / (2 * tau))
+def weight(x, x0, tau=.005):
+    return np.exp(- (x - x0) ** 2 / (2 * tau))
 
 
 def J(beta, x, y):
-    return sum([
-        np.exp(- (x[i] - x[j]) ** 2 / (2 * 0.005)) *
-        (y[j] - (beta[0] + beta[1] * x[j]))
-        for i in range(len(x))
-        for j in range(len(x))
-    ])
+    w = np.array([weight(x, x[i]) for i in range(len(x))])
+
+    tau = 0.05
+
+    d = [
+            np.exp(- sum(w[i]) * (y[i] - (beta[0] + beta[1] * x[i]) ** 2 / (2 * tau)))
+            for i in range(1, len(x))
+    ]
+    return sum(d)
 
 
 def closed_form(w, x, y):
@@ -48,12 +51,12 @@ def closed_form(w, x, y):
 def LWR(x, y, method="closed_form"):
     n = m = len(x)
     _learned = np.zeros(n)
-    w = np.array([kernel_function(x, x[i]) for i in range(m)])
+    w = np.array([weight(x, x[i]) for i in range(m)])
 
     if method == "closed_form":
         theta = closed_form(w, x, y)
     else:
-        theta = gradient_descent(x, y, J, limit=150, alpha=0.1)
+        theta = gradient_descent(x, y, J, limit=260, alpha=1)
 
     for i in range(n):
         _learned[i] = theta[0] + theta[1] * x[i]
@@ -73,10 +76,9 @@ line_points = [0.5, 1]
 line_values = [t0 + lp * t1 for lp in line_points]
 
 plt.plot(_x, _y, 'ko', markersize=3, label="data set 2")
-plt.plot(_x, learned_cf, markersize=1, label="Learned Closed Form")
-plt.plot(_x, learned_gd, 'r', markersize=1, label="Learned Gradient Descent")
+plt.plot(_x, learned_cf, markersize=1, label="LWR Closed Form")
+plt.plot(_x, learned_gd, 'r', markersize=1, label="LWR Gradient Descent")
 plt.plot(line_points, line_values, 'g', markersize=3, label="Learned Normal Regression")
-
 
 plt.legend(loc='best')
 
