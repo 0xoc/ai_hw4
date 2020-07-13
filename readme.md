@@ -125,7 +125,7 @@ A&theta; = b
 
 run ```python partB.py```
 
-### what id does
+### What it does
 
 Computes a linear model for the second data set which includes some outliers using LWR.
 the resulting model and the data set samples along with a model from normal regression
