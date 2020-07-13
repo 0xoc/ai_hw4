@@ -17,7 +17,7 @@ The ```loader.py``` file, includes a loader
    the loader function returns 
    an array of normalized objects.
 
-## Part A
+## Part A: Linear Regression
 Part A of the assignment is implemented in ```partA.py``` file.
 in this file, the two dataset files are loaded through the loader function from ```loader.py```.
 
@@ -83,7 +83,7 @@ _Theta learn_
   
 _Theta learn_
  
-## Part B
+## Part B: Weighted Linear Regression
  In locally weighted linear regression, instead of all data having the same importance, 
  the closer a sample is to a new unknown sample the more important it is.
  we could use a gaussian like weight function.
@@ -120,6 +120,16 @@ A&theta; = b
 
 **now we can solve for &theta; and arrive at a closed form formula:
 &theta; = A<sup>-1</sup>b**
+
+### How to Run
+
+run ```python partB.py```
+
+### what id does
+
+Computes a linear model for the second data set which includes some outliers using LWR.
+the resulting model and the data set samples along with a model from normal regression
+are generated in a figure.
 
 In the figure below you can see the effect of locally weighted regression. in LWR the model
 is more accurate even when there are some outliers in the sample data, because their effect on farther
