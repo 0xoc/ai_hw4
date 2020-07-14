@@ -2,38 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # the two different classes in data
-A = "Iris-setosa"
-B = "Iris-virginica"
-
-color = {
-    A: 'r',
-    B: 'b'
-}
-
-value = {
-    A: 1,
-    B: 0
-}
-
-
-def load(file):
-    handle = open(file)
-
-    data = handle.read()
-
-    data = data.split('\n')
-
-    _x = []
-    _y = []
-    _class = []
-
-    for line in data:
-        f1, f2, _cls = tuple(line.split(','))
-        _x.append(float(f1))
-        _y.append(float(f2))
-        _class.append(value[_cls])
-
-    return _x, _y, _class
+from utils import load, value, A, B, color, make_data
 
 
 def sigmoid(z):
@@ -96,11 +65,26 @@ def train(_features, _labels, _weights, lr, iters):
     return _weights, cost_history
 
 
+def calculate_accuracy(data_set_file, _weights):
+    # load the testing set, for later use
+    x_test, y_test, labels_test = load(data_set_file)
+
+    # calculate the accuracy
+    N = len(labels_test)
+    hit = 0
+
+    for i in range(N):
+        if decision_boundary(predict(np.array([1, x_test[i], y_test[i]]), weights)) == bool(labels_test[i]):
+            hit += 1
+
+    return hit / N * 100
+
+
+# make training and test data randomly chosen from original dataset
+make_data()
+
 # load the training set
 x, y, labels = load("training_set.data")
-
-# load the testing set, for later use
-x_test, y_test, labels_test = load("test_set.data")
 
 # class A indexes
 class_A = [i for i in range(len(labels)) if labels[i] == value[A]]
@@ -110,24 +94,18 @@ class_B = [i for i in range(len(labels)) if labels[i] == value[B]]
 features = np.array([[1, x[i], y[i]] for i in range(len(labels))])
 labels = np.array(labels)
 
+# train on data
 initial_weights = np.zeros(3)
+weights, history = train(features, labels, initial_weights, 0.1, 100000)
 
-weights, history = train(features, labels, initial_weights, 0.1, 1000)
-
-# calculate the accuracy
-N = len(labels_test)
-hit = 0
-
-for i in range(N):
-    if decision_boundary(predict(np.array([1, x_test[i], y_test[i]]), weights)) == bool(labels_test[i]):
-        hit += 1
+# accuracy on test data
+print("Model Accuracy on Test Data Set: %d percent" % calculate_accuracy('test_set.data', weights))
+print("Model Accuracy on Training Data Set: %d percent" % calculate_accuracy('iris.data', weights))
 
 # getting the x co-ordinates of the decision boundary
 plot_x = np.array([min(x) - 2, max(x) + 2])
 # getting corresponding y co-ordinates of the decision boundary
 plot_y = (-1 / weights[2]) * (weights[1] * plot_x + weights[0])
-
-print("Model Accuracy on Test Data: %f percent" % (hit / N * 100))
 
 # plot class A data with red color
 plt.plot([x[i] for i in class_A], [y[i] for i in class_A], color[A] + 'o', markersize=3, label=A)
@@ -136,7 +114,6 @@ plt.plot([x[i] for i in class_B], [y[i] for i in class_B], color[B] + 'o', marke
 
 # plot class B data with red color
 plt.plot(plot_x, plot_y, 'g', markersize=3, label="Boundary")
-
 
 plt.legend(loc='best')
 plt.show()

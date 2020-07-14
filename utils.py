@@ -1,4 +1,24 @@
+import random
+
 import numpy as np
+
+A = "Iris-setosa"
+B = "Iris-virginica"
+
+color = {
+    A: 'r',
+    B: 'b'
+}
+
+value = {
+    A: 1,
+    B: 0
+}
+
+actual = {
+    0: A,
+    1: B
+}
 
 
 def get_vector_data(data_set):
@@ -40,3 +60,59 @@ def gradient_descent(x_vector, y_vector, cost_function, alpha=0.1, ep=0.1 ** 12,
         last = cost
 
     return beta[0], beta[1], beta_track
+
+
+def load(file):
+    handle = open(file)
+
+    data = handle.read()
+
+    data = data.split('\n')
+
+    _x = []
+    _y = []
+    _class = []
+
+    for line in data:
+
+        if len(line.split(',')) != 3:
+            continue
+
+        f1, f2, _cls = tuple(line.split(','))
+        _x.append(float(f1))
+        _y.append(float(f2))
+        _class.append(value[_cls])
+
+    handle.close()
+
+    return _x, _y, _class
+
+
+def make_data():
+    x, y, labels = load("iris.data")
+
+    # class A indexes
+    class_A = [i for i in range(len(labels)) if labels[i] == value[A]]
+    # class B indexes
+    class_B = [i for i in range(len(labels)) if labels[i] == value[B]]
+
+    samples_A = random.sample(population=class_A, k=int(0.8 * len(class_A)))
+    samples_B = random.sample(population=class_B, k=int(0.8 * len(class_B)))
+
+    to = open('training_set.data', 'w')
+
+    for i in samples_A:
+        to.write('%s,%s,%s\n' % (x[i], y[i], actual[labels[i]]))
+
+    for i in samples_B:
+        to.write('%s,%s,%s\n' % (x[i], y[i], actual[labels[i]]))
+
+    to.close()
+
+    tto = open('test_set.data', 'w')
+
+    for i in range(len(labels)):
+        if i not in samples_A and i not in samples_B:
+            tto.write('%s,%s,%s\n' % (x[i], y[i], actual[labels[i]]))
+
+    tto.close()
