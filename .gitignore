@@ -140,3 +140,7 @@ cython_debug/
 # idea
 .vscode
 .idea
+
+# dataset
+test_set.data
+training_set.data

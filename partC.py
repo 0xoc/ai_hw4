@@ -100,7 +100,7 @@ weights, history = train(features, labels, initial_weights, 0.1, 100000)
 
 # accuracy on test data
 print("Model Accuracy on Test Data Set: %d percent" % calculate_accuracy('test_set.data', weights))
-print("Model Accuracy on Training Data Set: %d percent" % calculate_accuracy('iris.data', weights))
+print("Model Accuracy on Training Data Set: %d percent" % calculate_accuracy('training_set.data', weights))
 
 # getting the x co-ordinates of the decision boundary
 plot_x = np.array([min(x) - 2, max(x) + 2])
