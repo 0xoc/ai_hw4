@@ -145,3 +145,28 @@ This is the cost function that is used through out the training phase:
  - J(&theta;) = - 1/m &Sigma; [
 y<sup>(i)</sup> log(h<sub>&theta;</sub>(x<sup>(i)</sup>)) + (1 - y<sup>(i)</sup>)log(1 - h<sub>&theta;</sub>(x<sup>(i)</sup>))
 ]
+
+80 percent of the iris.data data set is randomly chosen for training, and
+the remaining 20 percent are selected for testing.
+
+after training a model on the train data, we measure the accuracy
+of the model by the following formula:
+
+ - accuracy = hit / N
+
+where hit is the total number of test cases that the model predicted correctly,
+and N is the number of total test cases.
+
+The accuracy of the model is measured both with the test data and the training data.
+
+ ![partc](http://serve.l37.ir/partc.png)
+ 
+ ### How to run
+ run ```python partC.py```
+ 
+ ### What it does
+ 
+ first a random set of training and testing data will be automatically generated.
+ 
+ Logistic Regression method with a sigmoid function is used to classify the samples and
+ the threshold for classification is set to 0.5.
