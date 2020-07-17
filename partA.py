@@ -60,7 +60,7 @@ def sigmoid(start, end):
 if __name__ == "__main__":
 
     # # plot using gradient descent
-    d = gradient_descent(*get_vector_data(ds1), J)
+    d = gradient_descent(*get_vector_data(ds1), J, limit=1e12)
     plot(d[0], d[1], ds1, "ds1 gradient descent")
 
     # plot using linear regression

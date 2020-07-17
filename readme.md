@@ -35,7 +35,7 @@ The first plot shows all the normalized data from dataset 1 and a line that has 
 After you close this plot, the second plot will show up. which is a plot of all the normalized data from dataset 1 and a 
 line that has been learned through closed form equations.
 
- - This is how normalization is done: value / ( max_value - min_value )
+ - This is how normalization is done: ( value - min_value )/ ( max_value - min_value )
  with the above formulation every sample data is normalized. If we don't normalize the data,
  different features with different scales and units may cause abnormalities in the final result.
  for example if one feature is measured in meters and another feature is measured in kilometers 
@@ -161,10 +161,10 @@ The accuracy of the model is measured both with the test data and the training d
 
  ![partc](http://serve.l37.ir/partc.png)
  
- ### How to run
- run ```python partC.py```
- 
- ### What it does
+### How to run
+run ```python partC.py```
+
+### What it does
  
  first a random set of training and testing data will be automatically generated.
  

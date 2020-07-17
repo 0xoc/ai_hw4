@@ -50,7 +50,7 @@ def load(file_name):
 
     # normalize the data
     for data in data_set:
-        data.height = data.height / (max_height - min_height)
-        data.weight = data.weight / (max_weight - min_weight)
+        data.height = (data.height - min_height) / (max_height - min_height)
+        data.weight = (data.weight - min_weight) / (max_weight - min_weight)
 
     return data_set
