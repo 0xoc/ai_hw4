@@ -1,3 +1,4 @@
+import math
 import random
 
 import numpy as np
@@ -73,15 +74,41 @@ def load(file):
     _y = []
     _class = []
 
+    max_f1 = - math.inf
+    min_f1 = math.inf
+
+    max_f2 = - math.inf
+    min_f2 = math.inf
+
     for line in data:
 
         if len(line.split(',')) != 3:
             continue
 
         f1, f2, _cls = tuple(line.split(','))
-        _x.append(float(f1))
-        _y.append(float(f2))
+
+        _f1 = float(f1)
+        _f2 = float(f2)
+
+        if _f1 > max_f1:
+            max_f1 = _f1
+        if _f1 < min_f1:
+            min_f1 = _f1
+        if _f2 > max_f2:
+            max_f2 = _f2
+        if _f2 < min_f2:
+            min_f2 = _f2
+
+        _x.append(_f1)
+        _y.append(_f2)
         _class.append(value[_cls])
+
+    # normalize the data
+    for i in range(len(_x)):
+        _x[i] = (_x[i] - min_f1) / (max_f1 - min_f1)
+
+    for i in range(len(_y)):
+        _y[i] = (_y[i] - min_f2) / (max_f2 - min_f2)
 
     handle.close()
 

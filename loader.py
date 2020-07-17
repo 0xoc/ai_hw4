@@ -1,3 +1,6 @@
+import math
+
+
 class Sample:
 
     def __init__(self, height, weight, is_male):
@@ -16,11 +19,11 @@ def load(file_name):
 
     data_set = []
 
-    max_height = 0
-    min_height = 0
+    max_height = - math.inf
+    min_height = math.inf
 
-    max_weight = 0
-    min_weight = 0
+    max_weight = - math.inf
+    min_weight = math.inf
 
     # extract sample data from the file
 

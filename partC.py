@@ -99,13 +99,20 @@ plot_x = np.array([min(x) - 2, max(x) + 2])
 # getting corresponding y co-ordinates of the decision boundary
 plot_y = (-1 / weights[2]) * (weights[1] * plot_x + weights[0])
 
+m = (plot_y[0] - plot_y[1]) / (plot_x[0] - plot_x[1])
+
+x1 = 1
+x2 = 0
+y1 = plot_y[0] + m * (x1 - plot_x[0])
+y2 = plot_y[0] + m * (x2 - plot_x[0])
+
+
 # plot class A data with red color
 plt.plot([x[i] for i in class_A], [y[i] for i in class_A], color[A] + 'o', markersize=3, label=A)
 # plot class B data with red color
 plt.plot([x[i] for i in class_B], [y[i] for i in class_B], color[B] + 'o', markersize=3, label=B)
 
-# plot class B data with red color
-plt.plot(plot_x, plot_y, 'g', markersize=3, label="Boundary")
+plt.plot([x1, x2], [y1, y2], 'g', markersize=3, label="Boundary")
 
 plt.legend(loc='best')
 plt.show()

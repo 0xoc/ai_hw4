@@ -31,11 +31,13 @@ def closed_form(x_vector, y_vector):
 
 
 def plot(t0, t1, data_set, label):
-    line_points = [0.5, 1]
+    line_points = [0, 1]
     line_values = [t0 + lp * t1 for lp in line_points]
 
     plt.plot([d.height for d in data_set], [d.weight for d in data_set], 'ko', markersize=3, label=label)
+
     plt.plot(line_points, line_values)
+
     plt.legend(loc='best')
 
     plt.ylabel('weight')
